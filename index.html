@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>♡</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      font-family: 'Press Start 2P', cursive;
+      overflow: hidden;
+      background: #ffd6ea;
+      pos  n yition: relative;
+    }
+
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #ffd6ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Press Start 2P', cursive;
+      color: #ff4f96;
+      font-size: 16px;
+      z-index: 100;
+      animation: blink 1s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .cloud {
+      position: absolute;
+      background: #fff;
+      width: 60px;
+      height: 40px;
+      border-radius: 10px;
+      box-shadow:
+        10px 0 #fff,
+        20px 0 #fff,
+        30px 0 #fff,
+        10px 10px #fff,
+        20px 10px #fff,
+        30px 10px #fff;
+      image-rendering: pixelated;
+      opacity: 0.8;
+      animation: floatClouds linear infinite;
+    }
+
+    @keyframes floatClouds {
+      0% { transform: translateX(-100px); }
+      100% { transform: translateX(110vw); }
+    }
+
+    .cloud:nth-child(1) { top: 10%; left: -100px; animation-duration: 60s; }
+    .cloud:nth-child(2) { top: 25%; left: -200px; animation-duration: 80s; }
+    .cloud:nth-child(3) { top: 40%; left: -150px; animation-duration: 90s; }
+    .cloud:nth-child(4) { top: 60%; left: -180px; animation-duration: 70s; }
+    .cloud:nth-child(5) { top: 75%; left: -220px; animation-duration: 100s; }
+
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      image-rendering: pixelated;
+      animation: twinkle 2s infinite ease-in-out;
+      z-index: 0;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes floatAcross {
+      0% { transform: translateX(-10vw) rotate(10deg); opacity: 1; }
+      100% { transform: translateX(110vw) rotate(-10deg); opacity: 0; }
+    }
+
+    .pixel-window {
+      width: 320px;
+      background-color: #ffd6ea;
+      border: 4px solid #ff99cc;
+      image-rendering: pixelated;
+      box-shadow: 8px 8px 0 #ff99cc;
+      position: relative;
+      animation: float 3s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .pixel-titlebar {
+      background: #ffb6d9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 8px;
+      border-bottom: 4px solid #ff99cc;
+    }
+
+    .pixel-titlebar span {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 5px;
+    }
+
+    .dot-purple { background-color: #c792fa; }
+    .dot-pink { background-color: #ff8ccf; }
+    .dot-white { background-color: #ffffff; }
+
+    .close { color: #ff6fa0; cursor: pointer; font-size: 12px; }
+
+    .pixel-content {
+      text-align: center;
+      padding: 30px 20px 50px;
+    }
+
+    #phrase {
+      color: #ff4f96;
+      font-size: 10px;
+      min-height: 48px;
+    }
+
+    button {
+      font-family: 'Press Start 2P', cursive;
+      background: #fff;
+      border: 3px solid #ff99cc;
+      color: #ff4f96;
+      padding: 8px 20px;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 #ff99cc;
+      font-size: 10px;
+    }
+
+    .button-wrapper {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .center-container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .music-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      background: #fff;
+      border: 2px solid #ff99cc;
+      color: #ff4f96;
+      padding: 4px 8px;
+      font-family: 'Press Start 2P';
+      cursor: pointer;
+      z-index: 3;
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 40px;
+      height: 4px;
+      background: white;
+      image-rendering: pixelated;
+      animation: floatAcross 3s linear forwards;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen" id="loading">Cargando. . .</div>
+
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+
+  <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loading = document.getElementById('loading');
+        loading.style.display = 'none';
+      }, 6000);
+    });
+
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 2 + 's';
+      document.body.appendChild(star);
+    }
+
+    setInterval(() => {
+      const shootingStar = document.createElement('div');
+      shootingStar.className = 'shooting-star';
+      shootingStar.style.top = Math.random() * 50 + '%';
+      shootingStar.style.left = '-50px';
+      document.body.appendChild(shootingStar);
+      setTimeout(() => shootingStar.remove(), 3000);
+    }, 15000);
+  </script>
+
+  <div class="center-container">
+    <div class="pixel-window">
+      <div class="pixel-titlebar">
+        <div>
+          <span class="dot-purple"></span>
+          <span class="dot-pink"></span>
+          <span class="dot-white"></span>
+        </div>
+        <div class="close">✕</div>
+      </div>
+      <div class="pixel-content">
+        <p id="phrase">cosas que amo de vos</p>
+      </div>
+      <div class="button-wrapper">
+        <button onclick="generatePhrase()">✿ OK ✿</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="click-sound" src="https://cdn.jsdelivr.net/gh/naptha/talkify@main/demo/click.mp3"></audio>
+  <audio id="music" loop>
+    <!-- musica -->
+    <source src="https://media.vocaroo.com/mp3/1l71jFpTT5K8" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const phrases = [
+      "tus ojitos",
+      "tu sonrisa linda",
+      "tu naricita hermosa",
+      "tus abrazos (son mi lugar favorito)",
+      "tus caderas (M ENCANTAN)",
+      "amo todo lo que haces por mi",
+      "tus manitas lindas",
+      "tu forma de ser",
+      "amo pasar tiempo con vos",
+      "AMO COMO T VES (AY DIOS, SOS TAN HERMOSA)",
+      "TUS PIERNAS HERMOSAS"
+    ];
+
+    function generatePhrase() {
+      const randomIndex = Math.floor(Math.random() * phrases.length);
+      document.getElementById("phrase").innerText = phrases[randomIndex];
+      const audio = document.getElementById("click-sound");
+      audio.currentTime = 0;
+      audio.play();
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("music");
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  </script>
+</body>
+</html>
