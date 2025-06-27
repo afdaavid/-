@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>♡</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
@@ -13,20 +13,15 @@
       font-family: 'Press Start 2P', cursive;
       overflow: hidden;
       background: #ffd6ea;
-      pos  n yition: relative;
+      position: relative;
     }
 
     .loading-screen {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
       background: #ffd6ea;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Press Start 2P', cursive;
+      display: flex; align-items: center; justify-content: center;
       color: #ff4f96;
       font-size: 16px;
       z-index: 100;
@@ -41,36 +36,46 @@
     .cloud {
       position: absolute;
       background: #fff;
-      width: 60px;
-      height: 40px;
+      width: 60px; height: 40px;
       border-radius: 10px;
       box-shadow:
-        10px 0 #fff,
-        20px 0 #fff,
-        30px 0 #fff,
-        10px 10px #fff,
-        20px 10px #fff,
-        30px 10px #fff;
+        10px 0 #fff, 20px 0 #fff, 30px 0 #fff,
+        10px 10px #fff, 20px 10px #fff, 30px 10px #fff;
       image-rendering: pixelated;
       opacity: 0.8;
       animation: floatClouds linear infinite;
     }
 
     @keyframes floatClouds {
-      0% { transform: translateX(-100px); }
-      100% { transform: translateX(110vw); }
+      0% { transform: translateX(-200px); }
+      100% { transform: translateX(120vw); }
     }
 
-    .cloud:nth-child(1) { top: 10%; left: -100px; animation-duration: 60s; }
-    .cloud:nth-child(2) { top: 25%; left: -200px; animation-duration: 80s; }
-    .cloud:nth-child(3) { top: 40%; left: -150px; animation-duration: 90s; }
-    .cloud:nth-child(4) { top: 60%; left: -180px; animation-duration: 70s; }
-    .cloud:nth-child(5) { top: 75%; left: -220px; animation-duration: 100s; }
+    .cloud1 { top: 10%; left: -200px; animation-duration: 60s; }
+    .cloud2 { top: 25%; left: -200px; animation-duration: 80s; }
+    .cloud3 { top: 40%; left: -200px; animation-duration: 90s; }
+    .cloud4 { top: 60%; left: -200px; animation-duration: 70s; }
+    .cloud5 { top: 75%; left: -200px; animation-duration: 100s; }
+    .snoopy {
+      position: absolute;
+      bottom: 0px; /* ahora está "dentro" de la nube */
+      left: 5px;
+      width: 80px;
+      image-rendering: pixelated;
+      z-index: 1; /* detrás del borde de la nube */
+      animation: floatSnoopy 4s ease-in-out infinite;
+      filter: drop-shadow(0 3px 1px rgba(0,0,0,0.15));
+      
+    }
+
+    @keyframes floatSnoopy {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
 
     .star {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 4px; height: 4px;
       background: #fff;
       image-rendering: pixelated;
       animation: twinkle 2s infinite ease-in-out;
@@ -80,17 +85,6 @@
     @keyframes twinkle {
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(4px); }
-      100% { transform: translateY(0); }
-    }
-
-    @keyframes floatAcross {
-      0% { transform: translateX(-10vw) rotate(10deg); opacity: 1; }
-      100% { transform: translateX(110vw) rotate(-10deg); opacity: 0; }
     }
 
     .pixel-window {
@@ -106,17 +100,14 @@
 
     .pixel-titlebar {
       background: #ffb6d9;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
       padding: 4px 8px;
       border-bottom: 4px solid #ff99cc;
     }
 
     .pixel-titlebar span {
       display: inline-block;
-      width: 10px;
-      height: 10px;
+      width: 10px; height: 10px;
       margin-right: 5px;
     }
 
@@ -179,6 +170,21 @@
       z-index: 3;
     }
 
+    .music-toggle:nth-of-type(2) {
+      top: 50px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes floatAcross {
+      0% { transform: translateX(-10vw) rotate(10deg); opacity: 1; }
+      100% { transform: translateX(110vw) rotate(-10deg); opacity: 0; }
+    }
+
     .shooting-star {
       position: absolute;
       width: 40px;
@@ -188,45 +194,50 @@
       animation: floatAcross 3s linear forwards;
       z-index: 1;
     }
+
+    body.night-mode {
+      background: #2c1338;
+    }
+
+    body.night-mode .pixel-window {
+      background-color: #3d1e50;
+      border: 4px solid #a26df2;
+      box-shadow: 8px 8px 0 #a26df2;
+    }
+
+    body.night-mode .pixel-titlebar {
+      background: #5a2d74;
+      border-bottom: 4px solid #a26df2;
+    }
+
+    body.night-mode .close,
+    body.night-mode #phrase {
+      color: #c29fff;
+    }
+
+    body.night-mode button,
+    body.night-mode .music-toggle {
+      background: #2c1338;
+      color: #c29fff;
+      border-color: #a26df2;
+      box-shadow: 4px 4px 0 #a26df2;
+    }
   </style>
 </head>
 <body>
   <div class="loading-screen" id="loading">Cargando. . .</div>
 
-  <div class="cloud"></div>
-  <div class="cloud"></div>
-  <div class="cloud"></div>
-  <div class="cloud"></div>
-  <div class="cloud"></div>
+  <!-- Nubes -->
+  <div class="cloud cloud1"></div>
+  <div class="cloud cloud2"></div>
+  <div class="cloud cloud3"></div>
+  <div class="cloud cloud4"></div>
+  <div class="cloud cloud5" id="snoopy-cloud">
+    <img id="snoopy" class="snoopy" src="https://raw.githubusercontent.com/afdaavid/snoopy/refs/heads/main/snoopy-durmiendo.png" alt="Snoopy" />
+  </div>
 
   <button class="music-toggle" onclick="toggleMusic()">🎵</button>
-
-  <script>
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const loading = document.getElementById('loading');
-        loading.style.display = 'none';
-      }, 6000);
-    });
-
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.animationDelay = Math.random() * 2 + 's';
-      document.body.appendChild(star);
-    }
-
-    setInterval(() => {
-      const shootingStar = document.createElement('div');
-      shootingStar.className = 'shooting-star';
-      shootingStar.style.top = Math.random() * 50 + '%';
-      shootingStar.style.left = '-50px';
-      document.body.appendChild(shootingStar);
-      setTimeout(() => shootingStar.remove(), 3000);
-    }, 15000);
-  </script>
+  <button class="music-toggle" onclick="toggleMode()">🌓</button>
 
   <div class="center-container">
     <div class="pixel-window">
@@ -249,30 +260,15 @@
 
   <audio id="click-sound" src="https://cdn.jsdelivr.net/gh/naptha/talkify@main/demo/click.mp3"></audio>
   <audio id="music" loop>
-    <!-- musica -->
     <source src="https://media.vocaroo.com/mp3/1l71jFpTT5K8" type="audio/mpeg">
   </audio>
 
   <script>
     const phrases = [
-      "tus ojitos",
-      "tu sonrisa linda",
-      "tu naricita hermosa",
-      "tus abrazos (son mi lugar favorito)",
-      "tus caderas (M ENCANTAN)",
-      "amo todo lo que haces por mi",
-      "tus manitas lindas",
-      "tu forma de ser",
-      "amo pasar tiempo con vos",
-      "AMO COMO T VES (AY DIOS, SOS TAN HERMOSA)",
-      "TUS PIERNAS HERMOSAS",
-      "tu vocecita linda",
-      "tu pelito",
-      "tu risa",
-      "tus labios",
-      "tus lunares",
-      "tu perfumito"
-      
+      "tus ojitos", "tu sonrisa linda", "tu naricita hermosa", "tus abrazos (son mi lugar favorito)",
+      "tus caderas (M ENCANTAN)", "amo todo lo que haces por mi", "tus manitas lindas", "tu forma de ser",
+      "amo pasar tiempo con vos", "AMO COMO T VES (AY DIOS, SOS TAN HERMOSA)", "TUS PIERNAS HERMOSAS",
+      "tu vocecita linda", "tu pelito", "tu risa", "tus labios", "tus lunares", "tu perfumito"
     ];
 
     function generatePhrase() {
@@ -283,14 +279,38 @@
       audio.play();
     }
 
+    function toggleMode() {
+      document.body.classList.toggle('night-mode');
+    }
+
     function toggleMusic() {
       const music = document.getElementById("music");
-      if (music.paused) {
-        music.play();
-      } else {
-        music.pause();
-      }
+      music.paused ? music.play() : music.pause();
     }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+      }, 6000);
+    });
+
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 2 + 's';
+      document.body.appendChild(star);
+    }
+
+    setInterval(() => {
+      const shootingStar = document.createElement('div');
+      shootingStar.className = 'shooting-star';
+      shootingStar.style.top = Math.random() * 50 + '%';
+      shootingStar.style.left = '-50px';
+      document.body.appendChild(shootingStar);
+      setTimeout(() => shootingStar.remove(), 3000);
+    }, 15000);
   </script>
 </body>
 </html>
